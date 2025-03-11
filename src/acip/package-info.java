@@ -19,4 +19,8 @@ package acip;
  *    7 Introduction to HashMaps in Java for Counting Occurrences
  *    
  * 87 practices
+ * 
+ * @author AlbertoVidana
+ * @since 2025-03-10
+ * @version 1.0
  */

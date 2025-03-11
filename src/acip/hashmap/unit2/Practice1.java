@@ -1,6 +1,8 @@
 package acip.hashmap.unit2;
 
 /**
+ * Optimizing Color Counting Using Java HashMaps
+ * 
  * You've been working with Java HashMap to count occurrences of each color in a list. 
  * Now, we'll focus on refining your skills to count elements in a list more efficiently. 
  * Your task is to optimize the existing Java code that counts how many times each color 
