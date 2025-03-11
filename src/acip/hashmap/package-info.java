@@ -1,7 +1,2 @@
-/**
- * 
- */
-/**
- * 
- */
+
 package acip.hashmap;
