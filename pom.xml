@@ -5,7 +5,4 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>CodeSignal</name>
   <description>CodeSignal is a wep page for learning and practice coding </description>
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-  </build>
 </project>
