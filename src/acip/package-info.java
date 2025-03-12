@@ -17,6 +17,7 @@ package acip;
  *    
  *    6 Introduction to HashMaps in Java
  *    7 Introduction to HashMaps in Java for Counting Occurrences
+ *    8 Data Aggregation Using HashMaps in Java
  *    
  * 87 practices
  * 
