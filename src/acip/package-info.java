@@ -6,6 +6,9 @@ package acip;
  * 
  *   1 Multidimensional Arrays and Their Traversal in Java
  *   2 Java HashMaps in Practice: Revision and Application
+ *   3 Mastering Task Decomposition in Java
+ *   4 Mastering Algorithms: HashMaps, Two Pointers, and Beyond in Java
+ *   5 Maximizing Efficiency in Problem-Solving Techniques in Java
  *   
  * 23 lessons
  * 
