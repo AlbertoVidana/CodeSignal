@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "vcode",
+			"path": "../../../Documents/GitHub/vcode"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive",
+		"files.watcherExclude": {
+			"**/target": true
+		}
+	}
+}
