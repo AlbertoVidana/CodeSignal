@@ -1,0 +1,50 @@
+Fundamentals of String Manipulation in Java
+Lesson Overview
+
+Welcome to the first lesson of this course where we'll practice the fundamentals of string manipulation in Java, specifically focusing on scenarios where we refrain from using built-in string methods. Navigating through complex character strings is an integral part of a software developer's toolkit, and Java does a phenomenal job of simplifying this process through its comprehensive set of built-in functionalities. Nevertheless, to truly master your craft, it's critical to peel back the layers and understand the core principles that power these built-in methods. This understanding will not only establish a stronger foundation in the language but also equip you to handle situations where you might not have the luxury of using these high-level functions, or where custom solutions would be more efficient.
+Quick Example
+
+Think of a string as an array of individual characters, each with its unique index. This feature allows us to access and manipulate each character independently. For instance, consider a simple operation such as reversing a string. You'd typically start from the last character (at an index equal to length of the string - 1), move towards the front, appending each character in reverse order to build a new string. This progression is achieved using a for loop with a step value of -1.
+
+Here is how the solution will look:
+
+Java
+
+// Reversing a string manually
+
+public class Solution {
+
+    public String reverseString(String originalString) {
+
+        String reversedString = "";
+
+        for (int i = originalString.length() - 1; i >= 0; i--) {
+
+            reversedString += originalString.charAt(i);
+
+        }
+
+        return reversedString;
+
+    }
+
+
+    public static void main(String[] args) {
+
+        Solution solution = new Solution();
+
+        String originalString = "hello";
+
+        String result = solution.reverseString(originalString);
+
+        
+
+        System.out.println(result);  // Output: "olleh"
+
+    }
+
+}
+
+Forward: Practice is Key!
+
+Take your time to digest this concept since it forms the basis of more elaborate tasks that we will encounter later. Once you're ready, let's dive into some hands-on programming exercises that will give you a practical feel for these concepts. Remember, our goal isn't simply to memorize algorithms but to develop an understanding of how to systematically break down and address problems — a skill that is at the heart of programming. As always, practice is your best friend, so let's get coding!
