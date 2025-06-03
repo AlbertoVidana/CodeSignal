@@ -1,0 +1,55 @@
+Basic Array Operations in Java Without Built-in Methods
+Lesson Overview
+
+Welcome to our practice-focused lesson on Basic Array Operations without Built-in Methods. An Array in Java is simply an ordered collection of items that can be of any type.
+
+Working with arrays is a fundamental aspect of Java programming. While Java indeed offers numerous built-in methods and classes (such as ArrayList) to make operations with arrays quite straightforward, understanding how to perform these operations without using built-in methods can dramatically sharpen your problem-solving skills, improve your knowledge of how data structures work under the hood, and prepare you for programming environments that may not provide such high-level abstractions.
+Quick Example
+
+Consider the concept of finding the maximum element in an array. Without using Java's built-in Collections.max() method or similar, we need to manually traverse the array, comparing each element to a variable initialized with the first element of the array. With each comparison, if we find an element greater than our variable, we update the variable. At the end of our traversal, this variable will hold the maximum value in the array.
+
+Here is how the solution will look:
+
+Java
+
+public class Solution {
+
+
+    // Method to find the maximum element in an array without using Collections.max()
+
+    public int findMaxElement(int[] array) {
+
+        int maxElement = array[0];  // Initialize with the first element
+
+        for (int element : array) {
+
+            if (element > maxElement) {
+
+                maxElement = element;
+
+            }
+
+        }
+
+        return maxElement;
+
+    }
+
+
+    // Example usage
+
+    public static void main(String[] args) {
+
+        Solution solution = new Solution();
+
+        int[] sampleArray = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+
+        System.out.println(solution.findMaxElement(sampleArray));  // Output: 9
+
+    }
+
+}
+
+Up Next: Practice!
+
+We encourage you to fully grasp this concept, as it's a building block for many complex algorithms. In the practice section, we will dive into tasks that require this and other basic array manipulation operations. Our goal is not only to teach you specific algorithms but more importantly, to build a solid understanding of how simple code can solve complex problems. Let's get started!
