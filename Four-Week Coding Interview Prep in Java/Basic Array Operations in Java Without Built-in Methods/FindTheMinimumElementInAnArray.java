@@ -6,7 +6,7 @@
  * If the array is empty, your function should return null.
  */
 
-public class Solution {
+public class FindTheMinimumElementInAnArray {
     public Integer findMinElement(int[] array) {
         // TODO: implement the function to find the minimum number from an array
         if (array == null) return null;
