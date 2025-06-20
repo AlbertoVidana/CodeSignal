@@ -1,0 +1,16 @@
+Great job on your first task! Now, let's proceed to modify our REST Controller.
+
+In this task, you will perform the following steps in the RecipeController:
+
+    Change the URL from /recipe/sandwich to /recipe/american-sandwich.
+    Refactor the endpoint to return a Recipe object instead of a string. The Recipe class has already been created for you in src/main/java/com/codesignal/models/Recipe.java and it has one field: instructions. Make sure the Recipe object contains the same instructions: Layer ham and cheese between two slices of bread, add mayo and mustard.
+
+Run the application using gradle bootRun and make a GET request to http://localhost:8080/recipe/american-sandwich using cURL:
+
+Bash
+
+curl http://localhost:8080/recipe/american-sandwich
+
+You should see a JSON response with the sandwich recipe instructions.
+
+Click the Run button to execute the tests, and then press Submit to proceed to the next task.
