@@ -1,0 +1,15 @@
+Great job on the previous task! Now, let's extend our application by adding another endpoint to our RecipeController. In this task, you will perform the following steps in the RecipeController:
+
+    Add a new endpoint with the URL /recipe/salad.
+    This endpoint should return a Recipe object.
+    Ensure the Recipe object contains the following instructions: Chop lettuce, tomatoes, cucumbers, and onions. Mix with olive oil and vinegar.
+
+Run the application using gradle bootRun and make a GET request to http://localhost:8080/recipe/salad using cURL:
+
+Bash
+
+curl http://localhost:8080/recipe/salad
+
+You should see a JSON response with the salad recipe instructions.
+
+Click the Run button to execute the tests, and then press Submit to proceed to the next task.
