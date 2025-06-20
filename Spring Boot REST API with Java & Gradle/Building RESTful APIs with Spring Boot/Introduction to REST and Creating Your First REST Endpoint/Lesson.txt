@@ -1,0 +1,94 @@
+Introduction to REST and Creating Your First REST Endpoint
+Introduction
+
+Welcome to the first lesson of the course, "Building RESTful APIs with Spring Boot." This is the second course in our series, and by now, you should be comfortable with concepts like Dependency Injection and Spring Beans. In this course, you'll learn how to build a simple REST API with Spring Boot. If you're unfamiliar with the term REST, don't worry; we’ll explain everything step by step. In this specific lesson, you'll get acquainted with REST, understand its benefits, and see how Spring Boot supports it. You'll also learn about a significant building block of Spring Boot called the controller, and you'll create your first one. Let's dive in!
+What is REST?
+
+REST stands for Representational State Transfer. Although it may sound complex, let’s simplify it with a digital recipe book as an example. In our digital recipe book, the most important aspect is the data—the recipes.
+Resources in REST
+
+Each recipe is a distinct piece of information that you can access, read, modify, or delete. For instance, "Chocolate Chip Cookies" or "Spaghetti Bolognese" are examples of resources within your digital recipe book. In a RESTful web service, resources are identified by URIs (Uniform Resource Identifiers), which act like addresses in your recipe book.
+
+Examples:
+
+    /recipes/cookies could point to the "Chocolate Chip Cookies" recipe.
+    /recipes/spaghetti could refer to the "Spaghetti Bolognese" recipe.
+
+Representations of Resources
+
+When you view or share a recipe, you're interacting with its representation. This could be a list of ingredients and instructions formatted in a specific way. For instance, requesting the "Chocolate Chip Cookies" recipe might yield:
+
+JSON
+
+{
+
+  "title": "Chocolate Chip Cookies",
+
+  "ingredients": ["flour", "sugar", "chocolate chips", "butter", "eggs"],
+
+  "instructions": "Mix ingredients, bake at 350°F for 12 minutes."
+
+}
+
+The actual recipe resides on the server, but you work with its representation.
+HTTP Methods in REST
+
+In REST, you manage resources using various HTTP methods, which correspond to actions you want to take on the recipes:
+
+    GET: Retrieve a specific recipe.
+        Example: GET /recipes/cookies retrieves the "Chocolate Chip Cookies" recipe.
+    POST: Add a new recipe.
+        Example: POST /recipes could create a new recipe, like "Banana Bread."
+    PUT: Update an existing recipe.
+        Example: PUT /recipes/cookies updates the "Chocolate Chip Cookies" recipe.
+    DELETE: Remove a recipe.
+        Example: DELETE /recipes/cookies removes the "Chocolate Chip Cookies" recipe from your collection.
+
+Benefits of REST
+
+RESTful APIs are highly beneficial in multi-client environments. For example, if you're building an online store, you can have both a mobile application and a website. By creating a RESTful backend, you can reuse the same backend logic for both the website and the mobile app. In contrast, a Spring MVC app cannot be reused in a mobile app. Additionally, RESTful APIs are popular in Single Page Applications (SPAs) like Angular, Vue, and React, which primarily need data and not full HTML pages.
+How Spring Boot Supports REST
+
+Spring Boot makes building REST APIs straightforward using multiple annotations. At the center of everything is the concept of a controller, a special class that handles incoming HTTP requests. Your application can contain many controllers, each responsible for a different aspect of your application. For example, one controller can manage recipes, and another can manage users.
+
+If an incoming HTTP request like GET /recipes/cookies is made, it can be handled by the RecipeController class. Conversely, an incoming request for a user, such as GET /users/gordon-ramsay, can be managed by a different controller, like UserController.
+
+Spring Boot annotations help in marking classes as controllers, mapping URLs to methods, and handling HTTP methods like GET and POST, making development simpler and allowing you to focus on business logic rather than boilerplate code.
+Creating Your First RESTful Controller
+
+Let’s create a simple controller to understand this better. Consider the following example:
+
+Java
+
+package com.codesignal.controllers;
+
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+
+public class RecipeController {
+
+
+    @GetMapping("/recipe")
+
+    public String getRecipe() {
+
+        return "{ \"title\": \"Chocolate Chip Cookies\", \"ingredients\": [\"flour\", \"sugar\", \"chocolate chips\", \"butter\", \"eggs\"], \"instructions\": \"Mix ingredients, bake at 350°F for 12 minutes.\" }";
+
+    }
+
+}
+
+Here’s a breakdown of what this example does:
+
+    @RestController: This annotation indicates that the class is a REST controller.
+    @GetMapping("/recipe"): This maps HTTP GET requests to the /recipe endpoint to the getRecipe method.
+    getRecipe: This method handles requests to the /recipe endpoint and returns a simple JSON representation of a recipe.
+
+Summary
+
+In this lesson, you learned about REST and its benefits. You also saw how Spring Boot supports building RESTful APIs through the use of controllers and annotations. Additionally, you created a simple RESTful controller. In the following practices, you'll apply what you've learned and build your own RESTful API. Great work so far!
