@@ -1,0 +1,13 @@
+Welcome to the last task of this unit! In this exercise, your task is to extend 
+the provided Spring Boot application by adding a new REST endpoint that 
+returns recipes with optional query parameters for dietary restrictions 
+and complexity level: GET /recipes?dietaryRestrictions=xxx&complexity=yyy.
+
+Here's a cURL command you can use to test your API:
+
+Bash
+
+curl -s -X GET "http://localhost:8080/recipes?dietaryRestrictions=vegan&complexity=easy" | python3 -m json.tool
+
+Follow the TODO instructions in the RecipeController class to complete this task. 
+When ready, click the Run button to execute tests and Submit to proceed to the next task.

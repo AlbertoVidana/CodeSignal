@@ -1,0 +1,14 @@
+Hello! You have developed a simple Spring Boot application that stores recipes. 
+The application provides a REST endpoint to fetch a recipe by its ID. 
+The application starts normally, but a server error occurs 
+when you call the endpoint using the following cURL command:
+
+Bash
+
+curl http://localhost:8080/recipes/1
+
+Your task is to identify the cause of this error and fix it. 
+Once you have fixed the error, click the Run button to execute 
+tests and Submit to proceed to the next task.
+
+Good luck!

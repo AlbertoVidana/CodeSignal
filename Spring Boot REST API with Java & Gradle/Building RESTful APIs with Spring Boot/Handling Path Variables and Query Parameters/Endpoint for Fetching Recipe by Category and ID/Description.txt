@@ -1,0 +1,16 @@
+Great progress so far! In this exercise, your task is to 
+extend the provided Spring Boot application by adding a new 
+REST endpoint that returns a recipe from a specific 
+category: GET /category/{categoryName}/recipes/{recipeId}.
+
+If the recipe is not found, return an IllegalArgumentException.
+
+Here's a cURL command you can use to test your API:
+
+Bash
+
+curl -s -X GET http://localhost:8080/category/summer-meals/recipes/0 | python3 -m json.tool
+
+Follow the TODO instructions in the RecipeController class to 
+complete this task. When ready, click the Run button to execute 
+tests and Submit to proceed to the next task.
