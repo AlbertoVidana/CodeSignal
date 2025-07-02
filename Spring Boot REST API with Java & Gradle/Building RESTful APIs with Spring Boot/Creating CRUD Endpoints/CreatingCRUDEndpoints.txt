@@ -1,0 +1,249 @@
+Introduction
+
+Welcome back! So far, we’ve focused on retrieving data from our RESTful 
+API using GET endpoints. Now, let’s take the next step: creating endpoints 
+for creating, updating, and deleting data. Mastering these operations is critical 
+for building fully functional APIs.
+Understanding CRUD
+
+In one of the previous lessons, we covered the concept of resources in REST. 
+In RESTful APIs, a resource can be anything you manage, like a recipe. 
+Each resource is identified by a URI, such as /recipes/123 or /users/john-doe. 
+So far in this course, we have only focused on reading resources. What other 
+operations can we perform on a resource? We can create, read, update, or delete 
+a resource. These four operations form the abbreviation CRUD.
+
+To perform these operations on a resource, different HTTP methods are used. 
+Each method corresponds to one of the CRUD operations. Spring Boot allows 
+for easy creation of endpoints for each method using special annotations. 
+Here’s a quick overview of the HTTP methods, corresponding Spring 
+annotations, and the expected operations:
+
+HTTP Method	Spring Annotation	Expected Operation
+GET	        @GetMapping	        Read/Retrieve
+POST	    @PostMapping	    Create
+PUT	        @PutMapping	        Update/Replace
+DELETE	    @DeleteMapping	    Delete
+PATCH	    @PatchMapping	    Partial Update
+
+Although PATCH is included here for completeness, we won’t be practicing it in this 
+course since it’s less frequently used compared to the others.
+Retrieving Data
+
+Let's begin with a quick recap on how to retrieve data. You've already created numerous GET endpoints in the previous exercises:
+
+Java
+
+@RestController
+@RequestMapping("/recipes")
+public class RecipeController {
+
+    @Autowired
+    private RecipeRepository recipeRepository;
+
+    @GetMapping
+    public List<RecipeItem> getAllRecipes() {
+        return recipeRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public RecipeItem getRecipeById(@PathVariable UUID id) {
+        return recipeRepository.findById(id);
+    }
+
+}
+
+The first method getAllRecipes returns a list of all recipes when a GET request is made to /recipes. The second method getRecipeById returns a single recipe based on the provided ID when a GET request is made to /recipes/{id}. The @GetMapping annotation maps the HTTP GET requests to these methods.
+Creating Data
+
+Now that we've reviewed retrieval, let's move on to adding new data using a POST endpoint:
+
+Java
+
+@PostMapping("/recipes")
+public RecipeItem addRecipe(@RequestBody RecipeItem recipeItem) {
+    recipeRepository.save(recipeItem);
+    return recipeItem;
+}
+
+The @PostMapping annotation maps HTTP POST requests to the addRecipe method. The @RequestBody annotation binds the recipe data from the request body to a RecipeItem object, which is then saved to the repository.
+Updating Data
+
+Next, let's explore how to update existing data using a PUT endpoint:
+
+Java
+
+@PutMapping("/recipes/{id}")
+
+public RecipeItem updateRecipe(@PathVariable UUID id, @RequestBody RecipeItem updatedRecipe) {
+
+    RecipeItem existingRecipe = recipeRepository.findById(id);
+
+    if (existingRecipe == null) {
+
+        throw new RuntimeException("Recipe not found!");
+
+    }
+
+
+    existingRecipe.setTitle(updatedRecipe.getTitle());
+
+    existingRecipe.setDescription(updatedRecipe.getDescription());
+
+
+    return existingRecipe;
+
+}
+
+The @PutMapping annotation maps HTTP PUT requests to the updateRecipe method. The @PathVariable annotation extracts the recipe ID from the URI, while the @RequestBody annotation binds the updated recipe details from the request body.
+Understanding Request Body
+
+In the context of a POST or PUT request, the request body is typically a JSON object containing the data you wish to create or update. For instance, when updating a recipe, your request body might look like this:
+
+JSON
+
+{
+
+  "title": "Updated Recipe Title",
+
+  "description": "Updated Recipe Description"
+
+}
+
+Using the @RequestBody annotation, this JSON object is automatically converted into a corresponding POJO (Plain Old Java Object). In our Digital Recipe Book example, it will be a RecipeItem object. This process of converting a request body into a POJO is called deserialization.
+Deleting Data
+
+Finally, let's discuss deleting data using a DELETE endpoint:
+
+Java
+
+@DeleteMapping("/recipes/{id}")
+
+public String deleteRecipe(@PathVariable UUID id) {
+
+    RecipeItem recipe = recipeRepository.findById(id);
+
+    if (recipe == null) {
+
+        throw new RuntimeException("Recipe not found!");
+
+    }
+
+
+    recipeRepository.delete(id);
+
+    return "Recipe deleted!";
+
+}
+
+The @DeleteMapping annotation maps HTTP DELETE requests to the deleteRecipe method. The @PathVariable annotation helps to extract the recipe ID from the URI in order to delete the specific recipe.
+Setting Common URL Prefix using @RequestMapping
+
+Let's take a closer look at how common URL prefixes can simplify our code. Right now, our RecipeController has four endpoints with the /recipes prefix:
+
+Java
+
+@RestController
+
+@RequestMapping("/recipes")
+
+public class RecipeController {
+
+
+    @Autowired
+
+    private RecipeRepository recipeRepository;
+
+
+    @GetMapping
+
+    public List<RecipeItem> getAllRecipes() {
+
+        return recipeRepository.findAll();
+
+    }
+
+
+    @PostMapping
+
+    public RecipeItem addRecipe(@RequestBody RecipeItem recipeItem) {
+
+        recipeRepository.save(recipeItem);
+
+        return recipeItem;
+
+    }
+
+
+    @GetMapping("/{id}")
+
+    public RecipeItem getRecipeById(@PathVariable UUID id) {
+
+        return recipeRepository.findById(id);
+
+    }
+
+
+    @PutMapping("/{id}")
+
+    public RecipeItem updateRecipe(@PathVariable UUID id, @RequestBody RecipeItem updatedRecipe) {
+
+        RecipeItem existingRecipe = recipeRepository.findById(id);
+
+        if (existingRecipe == null) {
+
+            throw new RuntimeException("Recipe not found!");
+
+        }
+
+
+        existingRecipe.setTitle(updatedRecipe.getTitle());
+
+        existingRecipe.setDescription(updatedRecipe.getDescription());
+
+
+        return existingRecipe;
+
+    }
+
+
+    @DeleteMapping("/{id}")
+
+    public String deleteRecipe(@PathVariable UUID id) {
+
+        RecipeItem recipe = recipeRepository.findById(id);
+
+        if (recipe == null) {
+
+            throw new RuntimeException("Recipe not found!");
+
+        }
+
+
+        recipeRepository.delete(id);
+
+        return "Recipe deleted!";
+
+    }
+
+}
+
+By defining the /recipes prefix at the class level using @RequestMapping("/recipes"), you avoid repeating the prefix for each method.
+@RequestMapping on the Method Level
+
+Before modern annotations like @GetMapping and @PutMapping emerged, @RequestMapping was used to map various HTTP methods. For example:
+
+Java
+
+@RequestMapping(value = "/recipes", method = RequestMethod.GET)
+
+public List<RecipeItem> getAllRecipes() {
+
+    return recipeRepository.findAll();
+
+}
+
+While we mostly use the more specific annotations nowadays, this approach can still be useful for handling complex mapping scenarios, such as mapping multiple HTTP methods to a single endpoint, but that’s beyond the scope of our lesson.
+Summary
+
+In this lesson, you’ve learned how to create CRUD endpoints using Spring Boot. We covered how to retrieve, create, update, and delete data in a RESTful API, as well as how to streamline our URL mappings with @RequestMapping. This foundational knowledge will enable you to build robust and fully functional APIs. In the upcoming practice exercises, you’ll have the opportunity to implement these CRUD operations yourself, reinforcing what you've learned in this lesson.

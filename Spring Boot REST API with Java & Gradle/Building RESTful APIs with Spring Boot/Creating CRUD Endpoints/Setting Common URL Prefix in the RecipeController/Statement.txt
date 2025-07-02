@@ -1,0 +1,21 @@
+Hey there! Let's take the code from the previous task and simplify 
+the RecipeController by using the @RequestMapping annotation 
+to set a common URL prefix at the class level. Once you've made 
+the necessary changes, start the application by running gradle 
+bootRun and ensure everything works smoothly. You can verify 
+this using the following cURL commands from the previous exercise:
+
+Bash
+# Get all recipes
+curl -sX GET http://localhost:8080/recipes | python3 -m json.tool
+# Get a recipe by ID
+curl -sX GET http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 | python3 -m json.tool
+# Add a new recipe
+curl -sX POST http://localhost:8080/recipes -H "Content-Type: application/json" -d '{"title": "New Recipe", "description": "This is a new test recipe."}' | python3 -m json.tool
+# Update an existing recipe
+curl -sX PUT http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 -H "Content-Type: application/json" -d '{"title": "Updated Recipe", "description": "This is an updated test recipe."}' | python3 -m json.tool
+# Delete a recipe
+curl -sX DELETE http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 | python3 -m json.tool
+
+Once you're done, feel free to hit the Run button to execute 
+tests and the Submit button to proceed to the next task.

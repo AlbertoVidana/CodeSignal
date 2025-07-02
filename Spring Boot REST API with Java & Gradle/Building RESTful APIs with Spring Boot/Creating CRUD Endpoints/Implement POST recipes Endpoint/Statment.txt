@@ -1,0 +1,13 @@
+our task is to implement a new POST /recipes endpoint in the RecipeController 
+class to allow users to add new recipes. Use the save method from 
+RecipeRepository to persist the new RecipeItem and return the newly 
+added RecipeItem with its generated ID.
+
+After implementing the endpoint, start the server by running 
+gradle bootRun and test it using the following cURL command:
+
+
+Bash
+curl -sX POST http://localhost:8080/recipes -H "Content-Type: application/json" -d '{"title": "New Recipe", "description": "This is a new test recipe."}' | python3 -m json.tool
+
+When ready, run the tests by clicking the Run button and proceed to the next task by pressing Submit.

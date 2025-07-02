@@ -1,0 +1,28 @@
+Welcome to this introductory task on creating CRUD endpoints! 
+In this exercise, you'll review how to create, read, update, 
+and delete records in a Spring Boot application by utilizing
+the provided REST endpoints. The code already contains all 
+the required endpoints, so your task is to examine it, start 
+the Spring Boot application by running the gradle bootRun 
+command, and observe the application's behavior. 
+Ensure everything works smoothly. You can use the following 
+cURL commands to see these endpoints in action:
+
+Bash
+# Get all recipes
+curl -sX GET http://localhost:8080/recipes | python3 -m json.tool
+
+# Get a recipe by ID
+curl -sX GET http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 | python3 -m json.tool
+
+# Add a new recipe
+curl -sX POST http://localhost:8080/recipes -H "Content-Type: application/json" -d '{"title": "New Recipe", "description": "This is a new test recipe."}' | python3 -m json.tool
+
+# Update an existing recipe
+curl -sX PUT http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 -H "Content-Type: application/json" -d '{"title": "Updated Recipe", "description": "This is an updated test recipe."}' | python3 -m json.tool
+
+# Delete a recipe
+curl -sX DELETE http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 | python3 -m json.tool
+
+Once you're done, feel free to hit the Run button to execute 
+tests and the Submit button to proceed to the next task.

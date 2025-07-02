@@ -1,0 +1,15 @@
+Hey there! It looks like there's a bug in our RecipeController 
+class affecting POST and PUT requests. The issue is causing these 
+requests not to work as expected. Your task is to diagnose and fix 
+the problem. Once you've made the necessary changes, start the 
+application by running gradle bootRun and verify that the POST and PUT 
+requests are working correctly by using the following cURL commands:
+
+Bash
+# Add a new recipe
+curl -sX POST http://localhost:8080/recipes -H "Content-Type: application/json" -d '{"title": "New Recipe", "description": "This is a new test recipe."}' | python3 -m json.tool
+# Update an existing recipe
+curl -sX PUT http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 -H "Content-Type: application/json" -d '{"title": "Updated Recipe", "description": "This is an updated test recipe."}' | python3 -m json.tool
+
+Once you're done, feel free to hit the Run button to 
+execute tests and the Submit button to proceed to the next task.
