@@ -1,0 +1,27 @@
+Let's enhance the CRUD endpoints from the previous unit using 
+the ResponseEntity class! Your task is to review all CRUD 
+endpoints and take note of the ResponseEntity usage. Start 
+the Spring Boot application by running the gradle bootRun 
+command and observe the application's behavior to ensure 
+everything works smoothly. Use the following cURL commands 
+to interact with these endpoints:
+
+Bash
+
+# Get all recipes
+curl -i -sX GET http://localhost:8080/recipes
+
+# Get a recipe by ID
+curl -i -sX GET http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111
+
+# Add a new recip
+curl -i -sX POST http://localhost:8080/recipes -H "Content-Type: application/json" -d '{"title": "New Recipe", "description": "This is a new test recipe."}'
+# Update an existing recipe
+
+curl -i -sX PUT http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 -H "Content-Type: application/json" -d '{"title": "Updated Recipe", "description": "This is an updated test recipe."}'
+
+# Delete a recipe
+curl -i -sX DELETE http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111
+
+Once you've completed the above steps, click the Run button to execute 
+tests and then the Submit button to proceed to the next task.
