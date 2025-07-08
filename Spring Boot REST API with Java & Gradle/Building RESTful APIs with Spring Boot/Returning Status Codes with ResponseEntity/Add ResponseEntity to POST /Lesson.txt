@@ -1,0 +1,18 @@
+Your task is to update the POST /recipes endpoint in the RecipeController 
+class to use the ResponseEntity class for more meaningful responses. 
+Specifically, ensure the following:
+
+    Return a 201 Created status code with the newly created RecipeItem in 
+    the response body if the recipe is successfully added.
+    Return a 400 Bad Request status code if the recipe data is invalid.
+
+After implementing the endpoint, start the server by running gradle 
+bootRun and test it using the following cURL command:
+
+Bash
+curl -i -sX POST http://localhost:8080/recipes -H "Content-Type: application/json" -d '{"title": "New Recipe", "description": "This is a new test recipe."}'
+Also, test with invalid data to see the 400 Bad Request response, for example:
+Bash
+curl -i -sX POST http://localhost:8080/recipes -H "Content-Type: application/json" -d '{"title": "", "description": ""}'
+When ready, run the tests by clicking the Run button and proceed 
+to the next task by pressing Submit.
