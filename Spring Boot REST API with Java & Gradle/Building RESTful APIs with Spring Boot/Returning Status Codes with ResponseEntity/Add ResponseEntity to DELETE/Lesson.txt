@@ -1,0 +1,18 @@
+Your task is to modify the DELETE /recipes/{id} endpoint in the RecipeController 
+class to return meaningful HTTP status codes using the ResponseEntity class. 
+Specifically, this endpoint should return:
+
+    204 No Content if the recipe was successfully deleted.
+    404 Not Found if the recipe with the specified ID does not exist.
+
+After implementing the changes, start the server by running 
+gradle bootRun and test it using the following cURL commands:
+
+To delete an existing recipe:
+
+Bash
+curl -i -sX DELETE http://localhost:8080/recipes/11111111-1111-1111-1111-111111111111 -H "Content-Type: application/json"
+To attempt to delete a non-existent recipe:
+Bash
+curl -i -sX DELETE http://localhost:8080/recipes/99999999-9999-9999-9999-999999999999 -H "Content-Type: application/json"
+When ready, run the tests by clicking the Run button and proceed to the next task by pressing Submit.
