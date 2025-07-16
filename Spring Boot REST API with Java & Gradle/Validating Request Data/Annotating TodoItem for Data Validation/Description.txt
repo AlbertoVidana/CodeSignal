@@ -1,0 +1,20 @@
+Welcome to another task on validating request data in your Spring Boot application! In this task, you will review the provided code and start the Spring Boot application by running the gradle bootRun command. Your goal is to add the necessary validation annotations to the TodoItem entity according to the following validation specifications:
+
+    title: Must not be blank and must be at least 3 characters long. (Use @NotBlank and @Size)
+    description: Must not be blank and must not exceed 256 characters. (Use @NotBlank and @Size)
+    status: Must be either "PENDING" or "COMPLETED". (Use @NotBlank and @Pattern)
+
+Once the application is running, you can test the /todo endpoint using the following cURL commands:
+
+Bash
+
+# Request with valid body
+
+curl -X POST http://localhost:8080/todo -H "Content-Type: application/json" -d '{"title": "Valid Todo", "description": "A valid todo item description", "status": "PENDING"}'
+
+
+# Request with invalid body (missing title and invalid status)
+
+curl -X POST http://localhost:8080/todo -H "Content-Type: application/json" -d '{"title": "", "description": "Description with invalid status", "status": "DOING"}'
+
+Click the "Run" button to execute tests and the "Submit" button to proceed to the next task.
