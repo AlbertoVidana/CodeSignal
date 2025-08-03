@@ -1,0 +1,220 @@
+Working with Headers in Spring Boot
+Introduction
+
+Welcome back to your advanced journey in mastering RESTful techniques with Spring Boot! In our previous lessons, we dug into validating request data, handling exceptions gracefully, and negotiating content types. Today, we’re stepping into the realm of HTTP headers—key-value pairs that play a crucial role in RESTful services. You will learn what HTTP headers are, their use cases, and how to work with them effectively in Spring Boot.
+What Are HTTP Headers?
+
+You're already familiar with key components of HTTP requests and responses such as HTTP methods, URIs, and bodies. Now it’s time to delve into HTTP headers. Simply put, headers are metadata associated with requests and responses, formatted as key-value pairs. They provide essential information that helps both the client and server understand how to process the data being exchanged.
+
+Here's an example of an HTTP request showing the URI, method, body, and headers:
+
+HTTP
+
+POST /api/todos HTTP/1.1
+
+Host: example.com
+
+Content-Type: application/json
+
+Authorization: Bearer <token>
+
+Accept: application/json
+
+Accept-Language: en-US
+
+
+{
+
+    "title": "Finish homework",
+
+    "description": "Complete the math and science homework.",
+
+    "dueDate": "2023-10-20"
+
+}
+
+In this example:
+
+    Method: POST
+    URI: /api/todos
+    Headers: Content-Type, Authorization, Accept, and Accept-Language
+    Body: The JSON payload containing the todo item details
+
+Common Use Cases for HTTP Headers
+
+HTTP headers serve many purposes. Here are some common headers and how they're used:
+
+    Accept: Informs the server about the types of data the client can process (Accept: application/json).
+    Accept-Language: Specifies the preferred languages (Accept-Language: en-US, fr-CA).
+    Authorization: Contains credentials for authenticating the client (Authorization: Bearer <token>).
+    Cache-Control: Directs caching mechanisms (Cache-Control: no-cache).
+    Content-Type: Indicates the media type of the resource (Content-Type: application/json).
+    Content-Length: The size of the resource in bytes (Content-Length: 348).
+
+Sometimes headers can have multiple values. For example:
+
+    Set-Cookie: Allows the server to pass multiple cookies (Set-Cookie: sessionId=abc; Expires=Wed, 09 Jun 2021 10:18:14 GMT;).
+
+Retrieving a Specific Header from the Request
+
+Let's start by retrieving a specific header from the request by its name. Here’s an example using the @RequestHeader annotation:
+
+Java
+
+@GetMapping("/todos/{id}")
+
+public ResponseEntity<TodoItem> getTodoItemById(@PathVariable int id, @RequestHeader("Accept-Language") String acceptLanguage) {
+
+    System.out.println("Accept-Language: " + acceptLanguage);
+
+    TodoItem todoItem = todoItemRepository.findById(id)
+
+            .orElseThrow(() -> new NoSuchElementException("Todo item with id " + id + " not found"));
+
+    return new ResponseEntity<>(todoItem, HttpStatus.OK);
+
+}
+
+In this snippet, the method getTodoItemById retrieves a specific to-do item by its ID. The @RequestHeader("Accept-Language") annotation extracts the Accept-Language header from the HTTP request and assigns it to the acceptLanguage variable. This value is then printed to the console.
+Using Optional HTTP Headers with java.util.Optional
+
+Sometimes, a header might be optional and may not be present in the request. In such cases, we can use java.util.Optional to handle the absence of a header gracefully:
+
+Java
+
+@GetMapping("/todos/{id}")
+
+public ResponseEntity<TodoItem> getTodoItemById(@PathVariable int id, @RequestHeader("Accept-Language") Optional<String> acceptLanguage) {
+
+    acceptLanguage.ifPresent(language -> System.out.println("Accept-Language: " + language));
+
+    TodoItem todoItem = todoItemRepository.findById(id)
+
+            .orElseThrow(() -> new NoSuchElementException("Todo item with id " + id + " not found"));
+
+    return new ResponseEntity<>(todoItem, HttpStatus.OK);
+
+}
+
+In this example, the @RequestHeader("Accept-Language") annotation uses Optional<String> to handle the Accept-Language header. The ifPresent method prints the header value if it is present.
+Using Optional HTTP Headers with required=false
+
+Another way to make a header optional is to use the required=false attribute of the @RequestHeader annotation:
+
+Java
+
+@GetMapping("/todos/{id}")
+
+public ResponseEntity<TodoItem> getTodoItemById(@PathVariable int id, @RequestHeader(value = "Accept-Language", required = false) String acceptLanguage) {
+
+    if (acceptLanguage != null) {
+
+        System.out.println("Accept-Language: " + acceptLanguage);
+
+    } else {
+
+        System.out.println("Accept-Language header is not present");
+
+    }
+
+    TodoItem todoItem = todoItemRepository.findById(id)
+
+            .orElseThrow(() -> new NoSuchElementException("Todo item with id " + id + " not found"));
+
+    return new ResponseEntity<>(todoItem, HttpStatus.OK);
+
+}
+
+In this snippet, the @RequestHeader annotation includes the value attribute to specify the header name and the required=false attribute to indicate that the header is optional. The method checks for the presence of the header and prints its value if it exists, or prints a message indicating the header is not present.
+Retrieving All Headers from the Request
+
+To retrieve all headers from a request, we can use a Map or a MultiValueMap:
+
+Java
+
+@GetMapping("/todos")
+
+public ResponseEntity<List<TodoItem>> getAllTodoItems(@RequestHeader Map<String, String> headers) {
+
+    headers.forEach((key, value) -> System.out.println(key + ": " + value));
+
+    return new ResponseEntity<>(todoItemRepository.findAll(), HttpStatus.OK);
+
+}
+
+Here, the getAllTodoItems method retrieves all to-do items. The @RequestHeader Map<String, String> headers annotation captures all headers from the request and stores them in a Map. The forEach loop prints each header key and its corresponding value to the console.
+
+Or using MultiValueMap:
+
+Java
+
+@GetMapping("/todos")
+
+public ResponseEntity<List<TodoItem>> getAllTodoItems(@RequestHeader MultiValueMap<String, String> headers) {
+
+    headers.forEach((key, value) -> System.out.println(key + ": " + String.join(",", value)));
+
+    return new ResponseEntity<>(todoItemRepository.findAll(), HttpStatus.OK);
+
+}
+
+This method is similar to the previous one, but it uses a MultiValueMap to capture headers. This allows handling headers with multiple values. The forEach loop prints each header and joins multiple values using a comma.
+Leveraging the HttpHeaders Class
+
+We can also use the HttpHeaders class for the previous functionalities. Here’s how:
+
+Java
+
+@GetMapping("/todos/{id}")
+
+public ResponseEntity<TodoItem> getTodoItemById(@PathVariable int id, @RequestHeader HttpHeaders headers) {
+
+    String acceptLanguage = headers.getFirst("Accept-Language");
+
+    System.out.println("Accept-Language: " + acceptLanguage);
+
+    TodoItem todoItem = todoItemRepository.findById(id)
+
+            .orElseThrow(() -> new NoSuchElementException("Todo item with id " + id + " not found"));
+
+    return new ResponseEntity<>(todoItem, HttpStatus.OK);
+
+}
+
+In this example, the @RequestHeader HttpHeaders headers annotation captures all request headers into an HttpHeaders object. The method retrieves the first Accept-Language header using headers.getFirst("Accept-Language") and prints it.
+
+Java
+
+@GetMapping("/todos")
+
+public ResponseEntity<List<TodoItem>> getAllTodoItems(@RequestHeader HttpHeaders headers) {
+
+    headers.forEach((key, value) -> System.out.println(key + ": " + String.join(",", value)));
+
+    return new ResponseEntity<>(todoItemRepository.findAll(), HttpStatus.OK);
+
+}
+
+Similar to the previous snippet, this method captures all request headers using HttpHeaders. The forEach loop prints each header key and its corresponding values joined by commas.
+Adding Headers to the Response
+
+To add headers to the response, we can use the ResponseEntity class, which allows us to set headers easily:
+
+Java
+
+@GetMapping("/todos")
+
+public ResponseEntity<List<TodoItem>> getAllTodoItems() {
+
+    HttpHeaders responseHeaders = new HttpHeaders();
+
+    responseHeaders.set("X-Custom-Header", "CustomHeaderValue");
+
+    return new ResponseEntity<>(todoItemRepository.findAll(), responseHeaders, HttpStatus.OK);
+
+}
+
+In this example, the getAllTodoItems method adds a custom header to the response. A new HttpHeaders object is created, and a custom header (X-Custom-Header) is set. The ResponseEntity constructor includes the list of to-do items, response headers, and HTTP status code.
+Summary
+
+In this lesson, we explored the significance of HTTP headers in RESTful services, learned how to retrieve specific and all headers from requests, utilized the HttpHeaders class for enhanced readability, and added custom headers to responses. Equipped with this knowledge, you are ready to tackle the forthcoming practice exercises where you'll apply these concepts hands-on.

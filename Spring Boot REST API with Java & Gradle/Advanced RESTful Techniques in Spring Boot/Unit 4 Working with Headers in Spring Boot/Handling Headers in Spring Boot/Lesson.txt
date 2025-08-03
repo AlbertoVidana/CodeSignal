@@ -1,0 +1,18 @@
+Welcome to the first task on working with HTTP Headers in Spring Boot. Your objective is to review the provided code to understand how to retrieve headers from the HTTP request and how to add them to the HTTP response. No coding is required for this task.
+
+To observe the functionality of this RESTful API, start the application and execute the following cURL commands:
+
+Bash
+
+# Retrieve all to-do items and observe the custom header in the response
+
+curl -i -H "Accept: application/json" http://localhost:8080/todos
+
+
+# Retrieve a specific to-do item by ID with the Accept-Language header
+
+curl -i -H "Accept-Language: en-US" http://localhost:8080/todos/1
+
+Check the responses to view the HTTP response headers and refer to the application logs to observe how Spring Boot processes HTTP request headers.
+
+After familiarizing yourself with the code, click the Run button to execute tests and the Submit button to proceed to the next task.
