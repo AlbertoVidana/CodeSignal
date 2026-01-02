@@ -1,0 +1,336 @@
+Complex Queries and Conditional Logic in PostgreSQL
+Introduction and Overview
+
+Welcome back! In our previous lessons, we've explored various ways to query and analyze data using PostgreSQL. We began by mastering text-based queries, moved on to understanding subqueries, and learned to create new columns and perform mathematical operations.
+
+In this lesson, we'll dive deeper into complex queries and conditional logic:
+
+    Using the CASE statement to categorize data.
+    Combining multiple conditions in the WHERE clause.
+    Enhancing queries with subqueries.
+
+These techniques will help you make your data queries more powerful and insightful.
+Dataset Review
+
+For convenience, the tables and columns in our Marvel movies dataset are:
+
+Movies Table
+
+Plain text
+
+ movie_id | movie_name | release_date | phase 
+
+----------+------------+--------------+-------
+
+Movie Details Table
+
+Plain text
+
+ movie_id | budget_million_usd | box_office_million_usd | imdb_rating | runtime_minutes 
+
+----------+--------------------+------------------------+-------------+-----------------
+
+Characters Table
+
+Plain text
+
+ character_id | movie_id | character_name | actor | screen_time_minutes 
+
+--------------+----------+----------------+-------+---------------------
+
+Understanding the CASE Statement in PostgreSQL
+
+The CASE statement allows you to perform conditional logic directly within your queries. It's similar to an IF-THEN-ELSE statement in programming languages.
+
+The syntax of a CASE statement is as follows:
+
+SQL
+
+SELECT
+
+    column1,
+
+    column2,
+
+    CASE
+
+        WHEN condition1 THEN result1
+
+        WHEN condition2 THEN result2
+
+        ...
+
+        ELSE resultN
+
+    END AS alias_name
+
+FROM
+
+    table_name;
+
+    CASE: Begins the conditional logic block.
+    WHEN condition1 THEN result1: If condition1 is true, the statement returns result1.
+    WHEN condition2 THEN result2: If condition2 is true, the statement returns result2.
+    ELSE resultN: If none of the conditions are true, the statement returns resultN. This part is optional but recommended for completeness.
+    END: Ends the CASE block.
+    AS alias_name: (Optional) Provides a temporary name for the resulting column.
+
+Let's see a real-world application of the CASE statement. We'll categorize movies based on their box office earnings into three categories: Flop, Hit, and Blockbuster.
+Categorizing Movies by Box Office Earnings
+
+We want to categorize movies as either a "Flop", "Hit", or "Blockbuster" based on box office sales. The query is:
+
+SQL
+
+SELECT
+
+    movies.movie_name,
+
+    CASE
+
+        WHEN movie_details.box_office_million_usd < 400 THEN 'Flop'
+
+        WHEN movie_details.box_office_million_usd BETWEEN 400 AND 1000 THEN 'Hit'
+
+        ELSE 'Blockbuster'
+
+    END AS success_category
+
+FROM
+
+    movies
+
+INNER JOIN
+
+    movie_details ON movies.movie_id = movie_details.movie_id;
+
+Let's break down this query:
+
+    We use INNER JOIN to combine data from the movies and movie_details tables based on movie_id.
+    The SELECT statement retrieves movie names.
+    CASE begins the conditional logic block to categorize the movies based on their box office earnings.
+        WHEN movie_details.box_office_million_usd < 400 THEN 'Flop': If the movie's box office earnings are less than 400 million USD, the movie is categorized as 'Flop'.
+        WHEN movie_details.box_office_million_usd BETWEEN 400 AND 1000 THEN 'Hit': If the movie's box office earnings are between 400 and 1000 million USD (inclusive), the movie is categorized as 'Hit'.
+        ELSE 'Blockbuster': If the movie's box office earnings are greater than 1000 million USD, the movie is categorized as 'Blockbuster'.
+        END AS success_category: Ends the CASE block and gives the result column the alias success_category.
+
+The output is:
+
+Plain text
+
+                 movie_name                  | success_category 
+
+---------------------------------------------+------------------
+
+ Iron Man                                    | Hit
+
+ The Incredible Hulk                         | Flop
+
+ Iron Man 2                                  | Hit
+
+ Thor                                        | Hit
+
+ Captain America: The First Avenger          | Flop
+
+ The Avengers                                | Blockbuster
+
+ Iron Man 3                                  | Blockbuster
+
+ Thor: The Dark World                        | Hit
+
+ Captain America: The Winter Soldier         | Hit
+
+ Guardians of the Galaxy                     | Hit
+
+ Avengers: Age of Ultron                     | Blockbuster
+
+ Ant-Man                                     | Hit
+
+ Captain America: Civil War                  | Blockbuster
+
+ Doctor Strange                              | Hit
+
+ Guardians of the Galaxy Vol. 2              | Hit
+
+ Spider-Man: Homecoming                      | Hit
+
+ Thor: Ragnarok                              | Hit
+
+ Black Panther                               | Blockbuster
+
+ Avengers: Infinity War                      | Blockbuster
+
+ Ant-Man and The Wasp                        | Hit
+
+ Captain Marvel                              | Blockbuster
+
+ Avengers: Endgame                           | Blockbuster
+
+ Spider-Man: Far From Home                   | Blockbuster
+
+ Black Widow                                 | Flop
+
+ Shang-Chi and the Legend of the Ten Rings   | Hit
+
+ Eternals                                    | Hit
+
+ Spider-Man: No Way Home                     | Blockbuster
+
+ Doctor Strange in the Multiverse of Madness | Blockbuster
+
+ Thor: Love and Thunder                      | Hit
+
+ Black Panther: Wakanda Forever              | Hit
+
+ Ant-Man and The Wasp: Quantumania           | Hit
+
+ Guardians of the Galaxy Vol. 3              | Hit
+
+ The Marvels                                 | Flop
+
+(33 rows)
+
+From the output, we can see that "The Incredible Hulk" is listed as a 'Flop', "Iron Man" is listed as a 'Hit', and "The Avengers" is listed as a 'Blockbuster'.
+
+This example demonstrates how you can use the CASE statement to derive meaningful categories from numerical data.
+Putting It All Together: Super Query
+
+Congratulations on reaching the last lesson of the "Intro to SQL with PostgreSQL" course path! Now let's put your PostgreSQL super powers to the test. In this example, we combine every query technique we have learned.
+
+We want to create a table with the following columns:
+
+    Movie Name: The name of the movie.
+    Success Level: Categorized as 'Flop', 'Hit', or 'Blockbuster' based on the box office earnings.
+    Profit in Millions: The difference between the box office earnings and the budget, representing the movie's profit.
+    Average Screen Time: The rounded average screen time of characters in the movie, displayed in minutes with 'mins' appended.
+
+Only movies with an IMDb rating higher than average should be included, and the output should be sorted by profit in descending order.
+
+Let's take a look at this super query:
+
+SQL
+
+SELECT
+
+    movies.movie_name,
+
+    CASE
+
+        WHEN movie_details.box_office_million_usd < 400 THEN 'Flop'
+
+        WHEN movie_details.box_office_million_usd BETWEEN 400 AND 1000 THEN 'Hit'
+
+        ELSE 'Blockbuster'
+
+    END AS "Success Level",
+
+    movie_details.box_office_million_usd - movie_details.budget_million_usd AS "Profit in Millions",
+
+    CONCAT(ROUND(AVG(characters.screen_time_minutes),0), ' mins') AS "Average Screen Time"
+
+FROM
+
+    movies
+
+INNER JOIN 
+
+    movie_details ON movies.movie_id = movie_details.movie_id
+
+INNER JOIN 
+
+    characters ON movies.movie_id = characters.movie_id
+
+WHERE
+
+    movie_details.imdb_rating > (
+
+        SELECT AVG(movie_details.imdb_rating) 
+
+        FROM movie_details)
+
+GROUP BY movies.movie_name, movie_details.box_office_million_usd, movie_details.budget_million_usd
+
+ORDER BY "Profit in Millions" DESC;
+
+Let's break this query down line by line:
+
+SELECT Clause:
+
+    Retrieves the movie_name.
+    Uses a CASE statement to determine the "Success Level" of each movie based on its box_office_million_usd:
+        Flop for earnings less than 400 million USD.
+        Hit for earnings between 400 and 1000 million USD.
+        Blockbuster for earnings greater than 1000 million USD.
+    Computes the "Profit in Millions" by subtracting the budget_million_usd from the box_office_million_usd.
+    Calculates the "Average Screen Time" for characters in the movie by rounding the average screen_time_minutes to the nearest whole number and appending 'mins'.
+
+FROM Clause:
+
+    Uses the movies table as the base dataset.
+
+INNER JOIN:
+
+    Combines movies with movie_details using movie_id.
+    Combines movies with characters also using movie_id.
+
+WHERE Clause:
+
+    Filters the results to include only movies where the imdb_rating is higher than the average IMDb rating of all movies.
+    The subquery (SELECT AVG(movie_details.imdb_rating) FROM movie_details) calculates the average IMDb rating across all movies.
+
+GROUP BY Clause:
+
+    Groups the results by movie_name, box_office_million_usd, and budget_million_usd to aggregate the average screen time correctly. When using aggregate functions, all non-aggregate columns in the SELECT statement must be included in the GROUP BY clause.
+
+ORDER BY Clause:
+
+    Orders the results based on "Profit in Millions" in descending order to list the most profitable movies first.
+
+The output is:
+
+Plain text
+
+                 movie_name                  | Success Level | Profit in Millions | Average Screen Time 
+
+---------------------------------------------+---------------+--------------------+---------------------
+
+ Avengers: Endgame                           | Blockbuster   |             2441.8 | 66 mins
+
+ Spider-Man: No Way Home                     | Blockbuster   |             1735.4 | 56 mins
+
+ Avengers: Infinity War                      | Blockbuster   |             1727.4 | 67 mins
+
+ Doctor Strange in the Multiverse of Madness | Blockbuster   |             1414.7 | 55 mins
+
+ The Avengers                                | Blockbuster   |             1299.6 | 51 mins
+
+ Spider-Man: Far From Home                   | Blockbuster   |              971.9 | 54 mins
+
+ Captain America: Civil War                  | Blockbuster   |              903.3 | 58 mins
+
+ Thor: Ragnarok                              | Hit           |              670.8 | 59 mins
+
+ Guardians of the Galaxy Vol. 2              | Hit           |              663.8 | 52 mins
+
+ Guardians of the Galaxy                     | Hit           |              603.3 | 44 mins
+
+ Guardians of the Galaxy Vol. 3              | Hit           |                595 | 55 mins
+
+ Captain America: The Winter Soldier         | Hit           |              544.3 | 48 mins
+
+ Thor: Love and Thunder                      | Hit           |              514.3 | 56 mins
+
+ Doctor Strange                              | Hit           |              512.7 | 46 mins
+
+ Iron Man                                    | Hit           |              445.2 | 34 mins
+
+ Shang-Chi and the Legend of the Ten Rings   | Hit           |              230.0 | 62 mins
+
+(16 rows)
+
+The output is a list of movies including their name, success level, profit in millions, and average screen time, filtered to include only those movies with above-average IMDb ratings and sorted by profit in descending order.
+
+Notice that none of the movies are labeled as a flop. Remember that we filtered out all movies with an IMDb rating less than average. From our output, we know that any movie labeled as a flop was excluded from our table. This means that all movies that made less than 400 million dollars in profit have an IMDb rating lower than average.
+Summary and Next Steps
+
+Congratulations on reaching the final lesson in the "Intro to SQL with PostgreSQL" course path. You have now mastered the key techniques for dealing with complex queries and conditional logic in PostgreSQL. You've come a long way in unlocking your PostgreSQL Super Powers! Keep exploring and practicing to further enhance your skills.
