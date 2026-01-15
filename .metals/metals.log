@@ -16,3 +16,11 @@ INFO: Unsupported notification method: $/setTrace
 2025.03.18 22:44:23 INFO  Shutting down server
 2025.03.18 22:44:23 INFO  shutting down Metals
 2025.03.18 22:44:23 INFO  Exiting server
+2026.01.14 23:57:36 INFO  Started: Metals version 1.6.4 in folders '/Users/alberto/git/repository/CodeSignal, /Users/alberto/Documents/GitHub/vcode' for client Visual Studio Code 1.108.0.
+2026.01.14 23:57:38 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.01.14 23:57:39 WARN  no build tool detected in workspace '/Users/alberto/git/repository/CodeSignal'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2026.01.14 23:57:39 WARN  Build server is not auto-connectable.
+2026.01.14 23:57:39 WARN  no build target for: /Users/alberto/git/repository/CodeSignal/Four-Week Coding Interview Prep in Java/Easy Interview Coding Practice in Java/Manual List Operations in Java/Circular Shift of List Elements Without Built-in Methods/Solution.java
+2026.01.14 23:57:39 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.01.14 23:57:41 WARN  Running javac-semanticdb failed for file:///Users/alberto/git/repository/CodeSignal/Four-Week%20Coding%20Interview%20Prep%20in%20Java/Easy%20Interview%20Coding%20Practice%20in%20Java/Manual%20List%20Operations%20in%20Java/Circular%20Shift%20of%20List%20Elements%20Without%20Built-in%20Methods/Solution.java. Output:
+
