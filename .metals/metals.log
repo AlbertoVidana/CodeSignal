@@ -24,3 +24,4 @@ INFO: Unsupported notification method: $/setTrace
 2026.01.14 23:57:39 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
 2026.01.14 23:57:41 WARN  Running javac-semanticdb failed for file:///Users/alberto/git/repository/CodeSignal/Four-Week%20Coding%20Interview%20Prep%20in%20Java/Easy%20Interview%20Coding%20Practice%20in%20Java/Manual%20List%20Operations%20in%20Java/Circular%20Shift%20of%20List%20Elements%20Without%20Built-in%20Methods/Solution.java. Output:
 
+2026.01.15 00:00:18 INFO  no build target found for /Users/alberto/git/repository/CodeSignal/Four-Week Coding Interview Prep in Java/Easy Interview Coding Practice in Java/Manual List Operations in Java/Circular Shift of List Elements Without Built-in Methods/Solution.java. Using fallback presentation compiler.

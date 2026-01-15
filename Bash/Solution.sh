@@ -6,7 +6,7 @@ available_mem=256
 download_size=128
 
 # TODO: Check if dir_name is not "./downloads" or there is not enough memory. If these conditions are met, print "Create directory or free up memory space."
-if [ "$dir_name" != "./downloads" ] || [ $available_mem -ge $download_size ]
+if [ "$dir_name" != "./downloads" ] || [ $available_mem -lt $download_size ]
 then
     echo "Create directory or free up memory space."
 # TODO: Check if `dir_name` is "./downloads" but `file_name` is "code.txt". If these conditions are met, print "File name already taken."
