@@ -1,0 +1,9 @@
+In this task, you are going to write a shell script to simulate updating software applications. 
+The script has three main parts:
+
+    Convert the list of application names passed as arguments into an array.
+    Iterate over this array and print a message indicating that each application is being "Checked".
+    Iterate over the positional arguments directly (without using the array) and print a message 
+    indicating that each application is being "Updated".
+
+Complete the TODOs in the update_apps function to ensure the script works as described.
