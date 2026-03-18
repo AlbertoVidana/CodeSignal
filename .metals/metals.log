@@ -28,3 +28,23 @@ INFO: Unsupported notification method: $/setTrace
 2026.01.15 00:02:16 INFO  Shutting down server
 2026.01.15 00:02:16 INFO  shutting down Metals
 2026.01.15 00:02:16 INFO  Exiting server
+2026.03.17 22:26:59 INFO  Started: Metals version 1.6.6 in folders '/Users/alberto/git/repository/CodeSignal, /Users/alberto/Documents/GitHub/vcode' for client Visual Studio Code 1.111.0.
+2026.03.17 22:26:59 INFO  Memory monitor started
+2026.03.17 22:27:02 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.03.17 22:27:04 INFO  no build target found for /Users/alberto/git/repository/CodeSignal/Building a Personal Tutor with Spring AI and DeepSeek/Integrating Spring AI with DeepSeek/Unit 1 : Sending Queries with Spring AI/Chatting with the AI/DeepSeekTutorApplication.java. Using fallback presentation compiler.
+2026.03.17 22:27:05 INFO  no build target found for /Users/alberto/git/repository/CodeSignal/Building a Personal Tutor with Spring AI and DeepSeek/Integrating Spring AI with DeepSeek/Unit 1 : Sending Queries with Spring AI/Chatting with the AI/DeepSeekTutorApplication.java. Using fallback presentation compiler.
+mar 17, 2026 10:27:05 P.M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+mar 17, 2026 10:27:05 P.M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1
+2026.03.17 22:27:05 WARN  no build tool detected in workspace '/Users/alberto/git/repository/CodeSignal'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2026.03.17 22:27:05 WARN  Build server is not auto-connectable.
+2026.03.17 22:27:05 WARN  no build target for: /Users/alberto/git/repository/CodeSignal/Building a Personal Tutor with Spring AI and DeepSeek/Integrating Spring AI with DeepSeek/Unit 1 : Sending Queries with Spring AI/Chatting with the AI/DeepSeekTutorApplication.java
+2026.03.17 22:27:05 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.03.17 22:27:07 WARN  Running javac-semanticdb failed for file:///Users/alberto/git/repository/CodeSignal/Building%20a%20Personal%20Tutor%20with%20Spring%20AI%20and%20DeepSeek/Integrating%20Spring%20AI%20with%20DeepSeek/Unit%201%20:%20Sending%20Queries%20with%20Spring%20AI/Chatting%20with%20the%20AI/DeepSeekTutorApplication.java. Output:
+
+2026.03.17 22:27:08 INFO  time: code lens generation in 2.33s
+2026.03.17 22:27:08 INFO  time: code lens generation in 2.33s
+mar 17, 2026 10:27:40 P.M. org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.03.17 22:29:08 WARN  no build target for: /Users/alberto/git/repository/CodeSignal/Building a Personal Tutor with Spring AI and DeepSeek/Integrating Spring AI with DeepSeek/Unit 1 : Sending Queries with Spring AI/Chatting with the AI/DeepSeekTutorApplication.java

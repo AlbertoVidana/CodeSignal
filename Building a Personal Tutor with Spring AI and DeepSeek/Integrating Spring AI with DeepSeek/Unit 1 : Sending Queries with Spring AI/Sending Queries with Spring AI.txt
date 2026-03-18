@@ -1,0 +1,144 @@
+Sending Queries with Spring AI
+Introduction: Sending a Simple Query
+
+Welcome to the first lesson of our course! In this introductory lesson, you'll learn how to send a simple query to an AI language model using Spring AI.
+
+We'll walk through the basics of setting up your development environment, configuring your application, and making your first request to an AI service. This foundational knowledge will prepare you for building more advanced features as you progress through the course.
+
+Let’s start by setting up your development environment so you can send your first query.
+Setting Up Your Environment
+
+To interact with DeepSeek, you’ll need a Java project set up with Spring Boot and Spring AI. For this course, we’ll be using Java 23.
+
+Spring AI is a Spring project that provides easy integration with popular AI models and providers, including OpenAI, DeepSeek, and others. It offers a unified API for sending prompts, handling responses, and managing configuration, making it simple to add AI-powered features to your Spring applications. You can learn more in the official Spring AI documentation.
+
+We’ll also include the Spring Web dependency, which isn’t required for this lesson but will be used in the second course of this path when we build a web API around our AI integration.
+
+You can set up your project in one of two ways:
+
+    Using the Spring Initializr Website:
+    Go to https://start.spring.io/ and create a new project with the following settings:
+        Project: Gradle
+        Java: 23
+        Dependencies: Spring Web and Spring AI
+
+    Using the Terminal:
+    Run the following command to generate a simple Spring Boot project:
+
+    Bash
+    curl https://start.spring.io/starter.zip \
+      -d name=deepseektutor \
+      -d groupId=com.codesignal.deepseektutor \
+      -d artifactId=deepseektutor \
+      -d type=gradle-project \
+      -d javaVersion=23 \
+      -d dependencies=web \
+      -o deepseektutor.zip
+
+    Unzip the project and open it in your favorite IDE. Then, add the following line to the dependencies section of your build.gradle file:
+
+    Gradle
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+
+With your project set up, the next step is to configure your DeepSeek API key so your application can access the DeepSeek service.
+Setting up DeepSeek
+
+Throughout this course path, we’ll be using DeepSeek, a powerful AI platform that provides advanced language models for generating and understanding text.
+
+To connect to DeepSeek, you’ll need to provide your API key, specify the model, and set the correct API base URL in your src/main/resources/application.properties file.
+
+Add the following lines:
+
+spring.ai.openai.api-key=[Add your DeepSeek Key here]
+spring.ai.openai.chat.options.model=deepseek-ai/DeepSeek-V3
+spring.ai.openai.base-url=https://api.deepseek.com/v1
+
+Replace [Add your DeepSeek Key here] with your actual DeepSeek API key.
+
+While we’ll be using DeepSeek for all examples and practices in this course, you can use any other compatible model by updating the model name, API key, and base URL accordingly in your configuration. This flexibility allows you to integrate with a variety of AI providers supported by Spring AI.
+Initializing the DeepSeek Client
+
+To understand how to interact with the DeepSeek API, we’ll use a public CommandLineRunner runner bean. This approach allows us to execute code as soon as the Spring Boot application starts up—perfect for running a quick test or demo before building a full API in later lessons.
+
+Here’s how you can define the runner bean in your application:
+
+Java
+@Bean
+public CommandLineRunner runner(ChatModel chatModel, ApplicationContext context) {
+    return args -> {
+        // This code will run after the application context is loaded
+        // We'll use it to send a query to DeepSeek next
+
+        // Exit the application after running the code
+        SpringApplication.exit(context, () -> 0);
+    };
+}
+
+The CommandLineRunner runs after the application context is loaded and right before the Spring Boot application finishes starting. The SpringApplication.exit(context, () -> 0); line gracefully shuts down the Spring Boot application after the runner has finished executing, which is useful for command-line demos or tests that should exit automatically.
+
+Now that you know how the runner works, let’s use it to send your first query to DeepSeek.
+Sending Your First Query to DeepSeek
+
+With your environment ready and the client initialized, you can send a prompt to DeepSeek using the call method of the ChatModel bean. Here’s how you do it:
+
+Java
+// Prepare prompt and get reply
+String prompt = "Tell me a fun fact about space.";
+String reply = chatModel.call(prompt);
+System.out.println("Answer: " + reply);
+
+This code sends a simple question to DeepSeek and prints the AI’s response. Next, let’s see how to extract and display the reply in your application.
+Extracting and Displaying the AI's Reply
+
+The call method returns the AI’s reply as a string, which you can print directly to the console:
+
+Java
+System.out.println("Answer: " + reply);
+
+When you run your application, you should see output similar to:
+
+Plain text
+Answer: Did you know that space is completely silent? There is no atmosphere in space, so sound has no medium or way to travel to be heard.
+
+Now, let’s look at the complete code example to tie everything together.
+Example: Full Code Implementation
+
+Your final code should look something like this:
+
+Java
+package com.codesignal.deepseektutor;
+
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class DeepSeekTutorApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DeepSeekTutorApplication.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner runner(ChatModel chatModel, ApplicationContext context) {
+        return args -> {
+            // Prepare prompt and get reply
+            String prompt = "Tell me a fun fact about space.";
+            String reply = chatModel.call(prompt);
+            System.out.println("Answer: " + reply);
+
+            // Exit application
+            SpringApplication.exit(context, () -> 0);
+        };
+    }
+}
+
+With this code in place, you’re ready to experiment with different queries and see how DeepSeek responds. In the next section, you’ll get a chance to practice sending your own queries and exploring the AI’s capabilities.
+Summary and Next Steps
+
+In this lesson, we covered the essential steps to send a simple query to DeepSeek's language model. We set up our environment, configured API access, and sent a message to receive a response. This foundational knowledge is crucial as we move forward in building more complex tutoring interactions.
+
+As you proceed to the practice exercises, I encourage you to experiment with different queries and explore the AI's responses. This hands-on practice will reinforce what you've learned and prepare you for the next unit, where we'll delve deeper into handling API parameters. Keep up the great work, and enjoy the journey of creating your personal tutor with DeepSeek!

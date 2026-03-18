@@ -1,0 +1,15 @@
+Great job making it to the final practice in this unit! Now it's your turn to write some code from the scratch.
+
+Follow the steps below:
+
+    Use the provided ChatModel bean to interact with the AI.
+    Define a simple user message as a prompt.
+    Send the prompt to the AI model and get its reply.
+    Print both the user's prompt and the AI's reply.
+
+Give it a try and and let me know if you have any questions!
+Cosmo10:18 PM
+
+Nicely done! You completed the practice correctly. 🚀
+
+If you have any questions, feel free to ask!
